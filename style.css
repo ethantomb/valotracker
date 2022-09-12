@@ -1,0 +1,111 @@
+body {
+    background-color: #fa4454;
+}
+
+input {
+    background-color: #364966;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+button {
+    background-color: #364966;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background-color: #7baaf0;
+    color: #fff;
+}
+
+p {
+    color: #fff;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-bottom: 5px;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid #fff;
+    width: 100%;
+    color: #fff;
+    font-family: monospace;
+    font-size: 25px;
+    text-align: left;
+}
+
+.filler>td {
+    border: 1px solid #fff;
+    background-color: #fa4454;
+    height: 20px;
+}
+
+tr {
+    background-color: #364966;
+}
+
+th {
+    background-color: #364966;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 10px;
+}
+
+td {
+
+    border: 1px solid #fff;
+    padding: 5px;
+    font-size: 25px;
+}
+
+h1 {
+    width: 100%;
+    font-size: 45px;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h3 {
+    width: 100%;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+input[type=radio] {
+    margin: 5px;
+    width: 20px;
+    height: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.regionLabel {
+    color: #fff;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.regionOption {
+    color: rgb(0, 0, 0);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+
+}
+
+.liveGameInfo {
+    visibility: hidden;
+}

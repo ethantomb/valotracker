@@ -1,0 +1,170 @@
+<html>
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FRKBFGL3RS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-FRKBFGL3RS');
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./API.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <title>ValTracker by Ethan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link data-n-head="ssr" rel="icon" type="image/x-icon" href="ValIcon.ico">
+</head>
+
+<body>
+    <h1>Valorant Player Tracker</h1>
+    <h3>To Use, enter any player's name and tag, select the region, and press "Search". The API returns a huge amount of
+        data, and it will take about 20-30 seconds to process your request. Huge shoutout to <a
+            href="https://docs.henrikdev.xyz/valorant.html">Henrik
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </a> for his amazing API.</h3>
+
+    <div class="input">
+        <input type="text" id="playerName" placeholder="Enter a player name">
+        <input type="text" id="playerTag" placeholder="Enter a player tag">
+        <br>
+        <label class="regionLabel" for="region">Region:</label>
+        <div class="inputOptions">
+            <input type="radio" name="region" value="NA" checked><label class="regionOption">NA</label>
+            <input type="radio" name="region" value="EU"><label class="regionOption">EU</label>
+            <input type="radio" name="region" value="AP"><label class="regionOption">AP</label>
+            <input type="radio" name="region" value="KR"><label class="regionOption">KR</label>
+        </div>
+
+        <br>
+        <button id="search" onclick="search()">Search</button>
+
+    </div>
+    <div class="response">
+        <h3 id="playername"></h3>
+
+        <p>Current Rank</p>
+        <p id="rank"></p>
+        <img src="" id="rankImg">
+        <table class="gameDat" id="gameInfo">
+            <tr>
+                <th></th>
+                <th>Unrated</th>
+                <th>Competitive</th>
+                <th>Deathmatch</th>
+
+            </tr>
+            <tr>
+                <th>Matches Played</th>
+                <td id="Unrated_G"></td>
+                <td id="Competitive_G"></td>
+                <td id="Deathmatch_G"></td>
+
+            </tr>
+            <tr>
+                <th>Wins</th>
+                <td id="Unrated_W"></td>
+                <td id="Competitive_W"></td>
+                <td id="Deathmatch_W"></td>
+            </tr>
+            <tr>
+                <th>Average K/D/A</th>
+                <td id="Unrated_KDA"></td>
+                <td id="Competitive_KDA"></td>
+                <td id="Deathmatch_KDA"></td>
+            </tr>
+            <tr>
+                <th>Best K/D/A</th>
+                <td id="Unrated_KDAbest"></td>
+                <td id="Competitive_KDAbest"></td>
+                <td id="Deathmatch_KDAbest"></td>
+
+            </tr>
+            <tr class="filler">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th></th>
+                <th>Spike Rush</th>
+                <th>Replication</th>
+                <th>Escalation</th>
+            </tr>
+            <tr>
+                <th>Matches Played</th>
+
+                <td id="Spike Rush_G"></td>
+                <td id="Replication_G"></td>
+                <td id="Escalation_G"></td>
+
+            </tr>
+            <tr>
+                <th>Wins</th>
+                <td id="Spike Rush_W"></td>
+                <td id="Replication_W"></td>
+                <td id="Escalation_W"></td>
+            </tr>
+            <tr>
+                <th>Average K/D/A</th>
+
+                <td id="Spike Rush_KDA"></td>
+                <td id="Replication_KDA"></td>
+                <td id="Escalation_KDA"></td>
+            </tr>
+            <tr>
+                <th>Best K/D/A</th>
+                <td id="Spike Rush_KDAbest"></td>
+                <td id="Replication_KDAbest"></td>
+                <td id="Escalation_KDAbest"></td>
+
+            </tr>
+        </table>
+        <br><br>
+        <div class="liveGameInfo">
+            <table class="Team">
+                <tr>
+                    <th>My Team</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Rank</th>
+                    <th>Last season winrate</th>
+                </tr>
+                <tr>
+                    <td id="TeamName_0"></td>
+                    <td id="TeamRank_0"></td>
+                    <td id="TeamWR_0"></td>
+                </tr>
+                <tr>
+                    <td id="TeamName_1"></td>
+                    <td id="TeamRank_1"></td>
+                    <td id="TeamWR_1"></td>
+                </tr>
+                <tr>
+                    <td id="TeamName_2"></td>
+                    <td id="TeamRank_2"></td>
+                    <td id="TeamWR_2"></td>
+                </tr>
+                <tr>
+                    <td id="TeamName_3"></td>
+                    <td id="TeamRank_3"></td>
+                    <td id="TeamWR_3"></td>
+                </tr>
+                <tr>
+                    <td id="TeamName_4"></td>
+                    <td id="TeamRank_4"></td>
+                    <td id="TeamWR_4"></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</body>
+
+</html>
