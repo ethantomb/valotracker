@@ -11,8 +11,9 @@
         gtag('config', 'G-FRKBFGL3RS');
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="./API.js"></script>
+    
     <link rel="stylesheet" href="./style.css">
+    <script async src="./API.js"></script>
     <title>ValTracker by Ethan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link data-n-head="ssr" rel="icon" type="image/x-icon" href="ValIcon.ico">
@@ -42,6 +43,7 @@
         <button id="search" onclick="search()">Search</button>
 
     </div>
+
     <div class="response">
         <h3 id="playername"></h3>
 
@@ -53,71 +55,92 @@
                 <th></th>
                 <th>Unrated</th>
                 <th>Competitive</th>
-                <th>Deathmatch</th>
-
             </tr>
             <tr>
                 <th>Matches Played</th>
                 <td id="Unrated_G"></td>
                 <td id="Competitive_G"></td>
-                <td id="Deathmatch_G"></td>
 
             </tr>
             <tr>
                 <th>Wins</th>
                 <td id="Unrated_W"></td>
                 <td id="Competitive_W"></td>
-                <td id="Deathmatch_W"></td>
             </tr>
             <tr>
                 <th>Average K/D/A</th>
                 <td id="Unrated_KDA"></td>
                 <td id="Competitive_KDA"></td>
-                <td id="Deathmatch_KDA"></td>
             </tr>
             <tr>
                 <th>Best K/D/A</th>
                 <td id="Unrated_KDAbest"></td>
                 <td id="Competitive_KDAbest"></td>
-                <td id="Deathmatch_KDAbest"></td>
 
             </tr>
             <tr class="filler">
                 <td></td>
                 <td></td>
                 <td></td>
+            </tr>
+            <tr>
+                <th></th>
+                <th>Deathmatch</th>
+
+                <th>Spike Rush</th>
+            </tr>
+            <tr>
+                <th>Matches Played</th>
+                <td id="Deathmatch_G"></td>
+                
+
+                <td id="Spike Rush_G"></td>
+
+            </tr>
+            <tr>
+                <th>Wins</th>
+                <td id="Deathmatch_W"></td>
+                <td id="Spike Rush_W"></td>
+            </tr>
+            <tr>
+                <th>Average K/D/A</th>
+                <td id="Deathmatch_KDA"></td>
+                <td id="Spike Rush_KDA"></td>
+            </tr>
+            <tr>
+                <th>Best K/D/A</th>
+                <td id="Deathmatch_KDAbest"></td>
+                <td id="Spike Rush_KDAbest"></td>
+
+            </tr>
+            <tr class="filler">
+                <td></td>
+                <td></td>
                 <td></td>
             </tr>
             <tr>
                 <th></th>
-                <th>Spike Rush</th>
                 <th>Replication</th>
                 <th>Escalation</th>
             </tr>
             <tr>
                 <th>Matches Played</th>
-
-                <td id="Spike Rush_G"></td>
                 <td id="Replication_G"></td>
                 <td id="Escalation_G"></td>
 
             </tr>
             <tr>
                 <th>Wins</th>
-                <td id="Spike Rush_W"></td>
                 <td id="Replication_W"></td>
                 <td id="Escalation_W"></td>
             </tr>
             <tr>
                 <th>Average K/D/A</th>
-
-                <td id="Spike Rush_KDA"></td>
                 <td id="Replication_KDA"></td>
                 <td id="Escalation_KDA"></td>
             </tr>
             <tr>
                 <th>Best K/D/A</th>
-                <td id="Spike Rush_KDAbest"></td>
                 <td id="Replication_KDAbest"></td>
                 <td id="Escalation_KDAbest"></td>
 
