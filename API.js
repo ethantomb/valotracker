@@ -31,8 +31,8 @@ async function httpGet(url) {
  */
 async function search() {
     document.getElementById("search").innerHTML = "Searching...";
-    
-    
+
+
     let input = document.getElementById("playerName").value;
     let name = input.split("#")[0];
     let tag = input.split("#")[1];
@@ -52,69 +52,72 @@ async function searchPlayer(name, tag) {
 
     //Normalize name.
     name = name.replace(" ", "%20");
-    document.querySelectorAll('.infoCard').forEach((div)=>{
-        div.style.animation="";
+    document.querySelectorAll('.infoCard').forEach((div) => {
+        div.style.animation = "";
     });
     let region = document.querySelector('input[name="region"]:checked').value;
     if (!name || !tag) {
-        
+
         console.log("err");
         document.getElementById("rankText").innerHTML = `Error: You gotta add a name#tag.`;
-        
-        document.getElementById("rankInfoCard").style.animation="slideIn 4s ease 0s 1 normal forwards";
-                
+
+        document.getElementById("rankInfoCard").style.animation = "slideIn 4s ease 0s 1 normal forwards";
+
         document.getElementById("search").innerHTML = "Search";
         return;
     }
     const O = '{"games":0,"wins":0,"K":0,"D":0,"A":0,"bestKD":-1,"bestK":0,"bestD":0,"bestA":0,"wonBestMatch":false}'
     //My simple object to store the data.
     var data = { "Metadata": { "Name": "", "Rank": "" }, "Unrated": JSON.parse(O), "Competitive": JSON.parse(O), "Deathmatch": JSON.parse(O), "Spike Rush": JSON.parse(O), "Replication": JSON.parse(O), "Escalation": JSON.parse(O) };
-    var ign;
+    var ign=name;
     categories = ["escalation", "spikerush", "deathmatch", "competitive", "unrated", "replication"]
     var url = mmrURL + region + "/" + name + "/" + tag;
     fetch(mmrURL + region + "/" + name + "/" + tag, {
         headers: {
-            "Content-Type": "text"
+            "Content-Type": "text/plain"
         }
     }).then((promiseMMR) => {
 
         promiseMMR.json().then((mmrdata) => {
-            if(mmrdata.status!=200){
+            if (mmrdata.status != 200) {
                 console.log("err");
                 document.getElementById("rankText").innerHTML = `Error: Failed to find player named ${name}#${tag}`;
 
-                document.getElementById("rankInfoCard").style.animation="slideIn 4s ease 0s 1 normal forwards";
+                document.getElementById("rankInfoCard").style.animation = "slideIn 4s ease 0s 1 normal forwards";
                 document.getElementById("search").innerHTML = "Search";
                 return;
-            }
+            }  
 
-            
+
 
             let rank = mmrdata["data"]["currenttierpatched"];
-            ign = mmrdata["data"]["name"];
+            if(rank==null){
+                document.getElementById("rankText").innerHTML = "Unranked";
+                document.getElementById("rankImage").src = "https://static.wikia.nocookie.net/valorant/images/b/b2/TX_CompetitiveTier_Large_0.png";
+            }else{
             document.getElementById("rankText").innerHTML = rank;
-            if (rank != null) {
-                document.getElementById("rankImage").src = mmrdata["data"]["images"]["small"];
+            document.getElementById("rankImage").src = mmrdata["data"]["images"]["small"];
             }
-            document.getElementById("rankInfoCard").style.animation="slideIn 4s ease 0s 1 normal forwards";
-
+            document.getElementById("rankInfoCard").style.animation = "slideIn 4s ease 0s 1 normal forwards";
+            
         });
 
     });
     for (gamemode of categories) {
         fetch(matchHistURL + region + "/" + name + "/" + tag + "?filter=" + gamemode, {
             headers: {
-                "Content-Type": "text"
+                "Content-Type": "text/plain"
             }
         }).then((gamesPromise) => {
+            
             gamesPromise.json().then((games) => {
+                console.log(games);
+                games = games["data"]
 
-                games=games["data"]
-                
-                
+
                 //let games = await httpGet(matchHistURL + region + "/" + name + "/" + tag + "?filter=" + gamemode)["data"];
                 let thisK, thisD, thisA;
-                
+
                 for (let i = 0; i < games.length; i++) {
 
                     let mode = games[i]["metadata"]["mode"];
@@ -125,8 +128,8 @@ async function searchPlayer(name, tag) {
                         data[mode]["games"] += 1;
 
                         let players = games[i]["players"]["all_players"];
-
-                        let searchedPlayer = players.filter(p => p["name"] == ign)[0];
+                        
+                        let searchedPlayer = players.filter(p => p["name"].toLowerCase() == ign.toLowerCase())[0];
 
                         if (searchedPlayer["team"] == winTeam) {
                             data[mode]["wins"] += 1
@@ -149,40 +152,40 @@ async function searchPlayer(name, tag) {
 
                     }
                 }
-                if(gamemode=="replication"){
+                if (gamemode == "replication") {
                     fillDivs(data);
                 }
-                
+
             });
         });
     }
-    
-    
+
+
 
 }
-async function fillDivs(data){
-    
-    
+async function fillDivs(data) {
+
+
     for (let [mode, gameDat] of Object.entries(data)) {
         if (mode != "Metadata") {
-            
-            mode=mode.replace(" ","");
+
+            mode = mode.replace(" ", "");
             document.getElementById(mode).querySelector(`span[name="matchPlayed"]`).innerHTML = gameDat["games"];
-            
+
             document.getElementById(mode).querySelector(`span[name="win"]`).innerHTML = gameDat["wins"];
             if (gameDat["games"] != 0) {
-                document.getElementById(mode).querySelector(`span[name="avgKDA"]`).innerHTML = Math.round(gameDat["K"]/gameDat["games"]) + "/" + Math.round(gameDat["D"]/gameDat["games"]) + "/" + Math.round(gameDat["A"]/gameDat["games"]);
+                document.getElementById(mode).querySelector(`span[name="avgKDA"]`).innerHTML = Math.round(gameDat["K"] / gameDat["games"]) + "/" + Math.round(gameDat["D"] / gameDat["games"]) + "/" + Math.round(gameDat["A"] / gameDat["games"]);
                 document.getElementById(mode).querySelector(`span[name="bestKDA"]`).innerHTML = Math.round(gameDat["bestK"]) + "/" + Math.round(gameDat["bestD"]) + "/" + Math.round(gameDat["bestA"]) + "(" + (gameDat["wonBestMatch"] ? "Won" : "Lost") + ")";
 
-            }else{
+            } else {
                 document.getElementById(mode).querySelector(`span[name="avgKDA"]`).innerHTML = Math.round(gameDat["K"]) + "/" + Math.round(gameDat["D"]) + "/" + Math.round(gameDat["A"]);
                 document.getElementById(mode).querySelector(`span[name="bestKDA"]`).innerHTML = Math.round(gameDat["bestK"]) + "/" + Math.round(gameDat["bestD"]) + "/" + Math.round(gameDat["bestA"]) + "(" + (gameDat["wonBestMatch"] ? "Won" : "Lost") + ")";
 
             }
-            document.getElementById(mode).style.animation="slideIn 4s ease 0s 1 normal forwards";
+            document.getElementById(mode).style.animation = "slideIn 4s ease 0s 1 normal forwards";
         }
     }
-    
+
     document.getElementById("search").innerHTML = "Search";
 }
 
