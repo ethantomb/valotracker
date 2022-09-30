@@ -51,6 +51,7 @@ async function searchPlayer(name, tag) {
 
 
     //Normalize name.
+    var ign=name;
     name = name.replace(" ", "%20");
     document.querySelectorAll('.infoCard').forEach((div) => {
         div.style.animation = "";
@@ -69,7 +70,7 @@ async function searchPlayer(name, tag) {
     const O = '{"games":0,"wins":0,"K":0,"D":0,"A":0,"bestKD":-1,"bestK":0,"bestD":0,"bestA":0,"wonBestMatch":false}'
     //My simple object to store the data.
     var data = { "Metadata": { "Name": "", "Rank": "" }, "Unrated": JSON.parse(O), "Competitive": JSON.parse(O), "Deathmatch": JSON.parse(O), "Spike Rush": JSON.parse(O), "Replication": JSON.parse(O), "Escalation": JSON.parse(O) };
-    var ign=name;
+    
     categories = ["escalation", "spikerush", "deathmatch", "competitive", "unrated", "replication"]
     var url = mmrURL + region + "/" + name + "/" + tag;
     fetch(mmrURL + region + "/" + name + "/" + tag, {
