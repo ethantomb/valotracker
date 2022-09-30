@@ -31,12 +31,14 @@ async function httpGet(url) {
  */
 async function search() {
     document.getElementById("search").innerHTML = "Searching...";
+    
+    
     let input = document.getElementById("playerName").value;
     let name = input.split("#")[0];
     let tag = input.split("#")[1];
     await sleep(1);
     let tStart = performance.now();
-    searchPlayer(name, tag);
+    await searchPlayer(name, tag);
 
 }
 /**
@@ -50,9 +52,17 @@ async function searchPlayer(name, tag) {
 
     //Normalize name.
     name = name.replace(" ", "%20");
-
+    document.querySelectorAll('.infoCard').forEach((div)=>{
+        div.style.animation="";
+    });
     let region = document.querySelector('input[name="region"]:checked').value;
-    if (name == "" || tag == "") {
+    if (!name || !tag) {
+        
+        console.log("err");
+        document.getElementById("rankText").innerHTML = `Error: You gotta add a name#tag.`;
+        
+        document.getElementById("rankInfoCard").style.animation="slideIn 4s ease 0s 1 normal forwards";
+                
         document.getElementById("search").innerHTML = "Search";
         return;
     }
@@ -69,7 +79,16 @@ async function searchPlayer(name, tag) {
     }).then((promiseMMR) => {
 
         promiseMMR.json().then((mmrdata) => {
-            console.log(mmrdata);
+            if(mmrdata.status!=200){
+                console.log("err");
+                document.getElementById("rankText").innerHTML = `Error: Failed to find player named ${name}#${tag}`;
+
+                document.getElementById("rankInfoCard").style.animation="slideIn 4s ease 0s 1 normal forwards";
+                document.getElementById("search").innerHTML = "Search";
+                return;
+            }
+
+            
 
             let rank = mmrdata["data"]["currenttierpatched"];
             ign = mmrdata["data"]["name"];
@@ -77,6 +96,7 @@ async function searchPlayer(name, tag) {
             if (rank != null) {
                 document.getElementById("rankImage").src = mmrdata["data"]["images"]["small"];
             }
+            document.getElementById("rankInfoCard").style.animation="slideIn 4s ease 0s 1 normal forwards";
 
         });
 
@@ -91,7 +111,7 @@ async function searchPlayer(name, tag) {
 
                 games=games["data"]
                 
-
+                
                 //let games = await httpGet(matchHistURL + region + "/" + name + "/" + tag + "?filter=" + gamemode)["data"];
                 let thisK, thisD, thisA;
                 
@@ -140,7 +160,7 @@ async function searchPlayer(name, tag) {
     
 
 }
-function fillDivs(data){
+async function fillDivs(data){
     
     
     for (let [mode, gameDat] of Object.entries(data)) {
@@ -159,6 +179,7 @@ function fillDivs(data){
                 document.getElementById(mode).querySelector(`span[name="bestKDA"]`).innerHTML = Math.round(gameDat["bestK"]) + "/" + Math.round(gameDat["bestD"]) + "/" + Math.round(gameDat["bestA"]) + "(" + (gameDat["wonBestMatch"] ? "Won" : "Lost") + ")";
 
             }
+            document.getElementById(mode).style.animation="slideIn 4s ease 0s 1 normal forwards";
         }
     }
     

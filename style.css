@@ -1,7 +1,19 @@
 body {
     background-color: #fa4454;
 }
-
+.inputContainer{
+    width: 100%;
+    display:grid;
+    grid-template-columns: 1% 92.5% 5%;
+}
+.input{
+    grid-column:2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self:center;
+    width: 100%;
+}
 input {
     background-color: #364966;
     color: #fff;
@@ -11,6 +23,13 @@ input {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 5px;
+}
+.inputOptions{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self:center;
+    width: 100%;
 }
 
 button {
@@ -38,7 +57,7 @@ p {
 #response{
     width: 100%;
     display:grid;
-    grid-template-columns: 2.5% 90% 5%;
+    grid-template-columns: 1% 92.5% 5%;
 }
 .infoCards{
     grid-column: 2;
@@ -51,6 +70,7 @@ p {
 
 }
 .infoCard{
+    opacity: 0%;
     display:grid;
     
 
@@ -78,23 +98,34 @@ p {
 }
 .wrapper{
     display:flex;
-    width: 25%;
+    width: 22%;
     margin: 1px;
-    padding: 10px;
+    padding: 5px;
     background-color: #d4e5ff;
+    
     border-radius: 10px;
     flex-direction: column;
+    align-items:stretch;
 }
 .stat{
     font-weight:bold;
-    
+    font-size: 14px;
 }
-
+.info{
+    font-size: 12px;
+    position: relative;
+    top: 0;
+}
 #rankInfoCard{
     align-self: center;
     align-items:center;
     justify-content: center;
     width: 50%;
+}
+
+@keyframes slideIn{
+    from{opacity: 0%;right:100vw;}
+    to{opacity:100%;right:0vw;}
 }
 .rank{
     display:flex;

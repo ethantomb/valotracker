@@ -11,7 +11,7 @@
         gtag('config', 'G-FRKBFGL3RS');
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    
+
     <link rel="stylesheet" href="./style.css">
     <script async src="./API.js"></script>
     <title>ValTracker by Ethan</title>
@@ -21,47 +21,48 @@
 
 <body>
     <h1>Valorant Player Tracker</h1>
-    
 
+    <div class="inputContainer">
     <div class="input">
         <input type="text" id="playerName" placeholder="Name#Tag">
-        
+
         <br>
         <label class="regionLabel" for="region">Region:</label>
         <div class="inputOptions">
-            <input type="radio" name="region" value="NA" checked><label class="regionOption">NA</label>
-            <input type="radio" name="region" value="EU"><label class="regionOption">EU</label>
-            <input type="radio" name="region" value="AP"><label class="regionOption">AP</label>
-            <input type="radio" name="region" value="KR"><label class="regionOption">KR</label>
+            <input type="radio" name="region" value="NA" checked><label class="regionOption">North America</label>
+            <input type="radio" name="region" value="EU"><label class="regionOption">Europe</label>
+            <input type="radio" name="region" value="AP"><label class="regionOption">Asia Pacific</label>
+            <input type="radio" name="region" value="KR"><label class="regionOption">Korea</label>
         </div>
 
         <br>
         <button id="search" onclick="search()">Search</button>
 
     </div>
-
+</div>
     <div id="response">
-        
 
-        
+
+
         <div class="infoCards">
             <div class="infoCard" id="rankInfoCard">
                 <header>Current Rank</header>
                 <main>
                     <div class="rank">
                         <span id="rankText" class="rankText">Dirt 1</span>
-                        <span class="rankImage"><img id="rankImage" src = "https://i.kym-cdn.com/entries/icons/original/000/031/672/cover7.jpg"></span>
-                    </div>    
+                        <span class="rankImage"><img id="rankImage"
+                                src="https://i.kym-cdn.com/entries/icons/original/000/031/672/cover7.jpg"></span>
+                    </div>
                 </main>
             </div>
             <div class="infoCard" id="Unrated">
-                
-                    <header>Unrated</header>
-                    <main>
 
-                    
+                <header>Unrated</header>
+                <main>
+
+
                     <div class="wrapper">
-                        <span class="stat">Matches Played</span>
+                        <span class="stat">Matches</span>
                         <span class="info" name="matchPlayed">1000</span>
                     </div>
                     <div class="wrapper">
@@ -69,249 +70,152 @@
                         <span class="info" name="win">0</span>
                     </div>
                     <div class="wrapper">
-                        <span class="stat">Average KDA</span>
+                        <span class="stat">Avg KDA</span>
                         <span class="info" name="avgKDA">0/30/5</span>
                     </div>
                     <div class="wrapper">
                         <span class="stat">Best KDA</span>
-                        <span class="info"name="bestKDA">1/20/1 (Lost)</span>
+                        <span class="info" name="bestKDA">1/20/1 (Lost)</span>
                     </div>
 
-                    </main>
-                
+                </main>
+
             </div>
             <div class="infoCard" id="Competitive">
-                
+
                 <header>Competitive</header>
                 <main>
 
-                
-                <div class="wrapper">
-                    <span class="stat">Matches Played</span>
-                    <span class="info" name="matchPlayed">1000</span>
-                </div>
-                <div class="wrapper">
-                    <span class="stat">Wins</span>
-                    <span class="info" name="win">0</span>
-                </div>
-                <div class="wrapper">
-                    <span class="stat">Average KDA</span>
-                    <span class="info" name="avgKDA">0/30/5</span>
-                </div>
-                <div class="wrapper">
-                    <span class="stat">Best KDA</span>
-                    <span class="info"name="bestKDA">1/20/1 (Lost)</span>
-                </div>
+
+                    <div class="wrapper">
+                        <span class="stat">Matches</span>
+                        <span class="info" name="matchPlayed">1000</span>
+                    </div>
+                    <div class="wrapper">
+                        <span class="stat">Wins</span>
+                        <span class="info" name="win">0</span>
+                    </div>
+                    <div class="wrapper">
+                        <span class="stat">Avg KDA</span>
+                        <span class="info" name="avgKDA">0/30/5</span>
+                    </div>
+                    <div class="wrapper">
+                        <span class="stat">Best KDA</span>
+                        <span class="info" name="bestKDA">1/20/1 (Lost)</span>
+                    </div>
 
                 </main>
-            
-        </div>
-        <div class="infoCard" id="Deathmatch">
-                
-            <header>Deathmatch</header>
-            <main>
 
-            
-            <div class="wrapper">
-                <span class="stat">Matches Played</span>
-                <span class="info" name="matchPlayed">1000</span>
             </div>
-            <div class="wrapper">
-                <span class="stat">Wins</span>
-                <span class="info" name="win">0</span>
+            <div class="infoCard" id="Deathmatch">
+
+                <header>Deathmatch</header>
+                <main>
+
+
+                    <div class="wrapper">
+                        <span class="stat">Matches</span>
+                        <span class="info" name="matchPlayed">1000</span>
+                    </div>
+                    <div class="wrapper">
+                        <span class="stat">Wins</span>
+                        <span class="info" name="win">0</span>
+                    </div>
+                    <div class="wrapper">
+                        <span class="stat">Avg KDA</span>
+                        <span class="info" name="avgKDA">0/30/5</span>
+                    </div>
+                    <div class="wrapper">
+                        <span class="stat">Best KDA</span>
+                        <span class="info" name="bestKDA">1/20/1 (Lost)</span>
+                    </div>
+
+                </main>
+
             </div>
-            <div class="wrapper">
-                <span class="stat">Average KDA</span>
-                <span class="info" name="avgKDA">0/30/5</span>
+            <div class="infoCard" id="SpikeRush">
+
+                <header>Spike Rush</header>
+                <main>
+
+
+                    <div class="wrapper">
+                        <span class="stat">Matches</span>
+                        <span class="info" name="matchPlayed">1000</span>
+                    </div>
+                    <div class="wrapper">
+                        <span class="stat">Wins</span>
+                        <span class="info" name="win">0</span>
+                    </div>
+                    <div class="wrapper">
+                        <span class="stat">Avg KDA</span>
+                        <span class="info" name="avgKDA">0/30/5</span>
+                    </div>
+                    <div class="wrapper">
+                        <span class="stat">Best KDA</span>
+                        <span class="info" name="bestKDA">1/20/1 (Lost)</span>
+                    </div>
+
+                </main>
+
             </div>
-            <div class="wrapper">
-                <span class="stat">Best KDA</span>
-                <span class="info"name="bestKDA">1/20/1 (Lost)</span>
+            <div class="infoCard" id="Replication">
+
+                <header>Replication</header>
+                <main>
+
+
+                    <div class="wrapper">
+                        <span class="stat">Matches</span>
+                        <span class="info" name="matchPlayed">1000</span>
+                    </div>
+                    <div class="wrapper">
+                        <span class="stat">Wins</span>
+                        <span class="info" name="win">0</span>
+                    </div>
+                    <div class="wrapper">
+                        <span class="stat">Avg KDA</span>
+                        <span class="info" name="avgKDA">0/30/5</span>
+                    </div>
+                    <div class="wrapper">
+                        <span class="stat">Best KDA</span>
+                        <span class="info" name="bestKDA">1/20/1 (Lost)</span>
+                    </div>
+
+                </main>
+
             </div>
+            <div class="infoCard" id="Escalation">
 
-            </main>
-        
-    </div>
-    <div class="infoCard" id="SpikeRush">
-                
-        <header>Spike Rush</header>
-        <main>
+                <header>Escalation</header>
+                <main>
 
-        
-        <div class="wrapper">
-            <span class="stat">Matches Played</span>
-            <span class="info" name="matchPlayed">1000</span>
+
+                    <div class="wrapper">
+                        <span class="stat">Matches</span>
+                        <span class="info" name="matchPlayed">1000</span>
+                    </div>
+                    <div class="wrapper">
+                        <span class="stat">Wins</span>
+                        <span class="info" name="win">0</span>
+                    </div>
+                    <div class="wrapper">
+                        <span class="stat">Avg KDA</span>
+                        <span class="info" name="avgKDA">0/30/5</span>
+                    </div>
+                    <div class="wrapper">
+                        <span class="stat">Best KDA</span>
+                        <span class="info" name="bestKDA">1/20/1 (Lost)</span>
+                    </div>
+
+                </main>
+
+            </div>
         </div>
-        <div class="wrapper">
-            <span class="stat">Wins</span>
-            <span class="info" name="win">0</span>
-        </div>
-        <div class="wrapper">
-            <span class="stat">Average KDA</span>
-            <span class="info" name="avgKDA">0/30/5</span>
-        </div>
-        <div class="wrapper">
-            <span class="stat">Best KDA</span>
-            <span class="info"name="bestKDA">1/20/1 (Lost)</span>
-        </div>
 
-        </main>
-    
-</div>
-<div class="infoCard" id="Replication">
-                
-    <header>Replication</header>
-    <main>
-
-    
-    <div class="wrapper">
-        <span class="stat">Matches Played</span>
-        <span class="info" name="matchPlayed">1000</span>
-    </div>
-    <div class="wrapper">
-        <span class="stat">Wins</span>
-        <span class="info" name="win">0</span>
-    </div>
-    <div class="wrapper">
-        <span class="stat">Average KDA</span>
-        <span class="info" name="avgKDA">0/30/5</span>
-    </div>
-    <div class="wrapper">
-        <span class="stat">Best KDA</span>
-        <span class="info"name="bestKDA">1/20/1 (Lost)</span>
-    </div>
-
-    </main>
-
-</div>
-<div class="infoCard" id="Escalation">
-                
-    <header>Escalation</header>
-    <main>
-
-    
-    <div class="wrapper">
-        <span class="stat">Matches Played</span>
-        <span class="info" name="matchPlayed">1000</span>
-    </div>
-    <div class="wrapper">
-        <span class="stat">Wins</span>
-        <span class="info" name="win">0</span>
-    </div>
-    <div class="wrapper">
-        <span class="stat">Average KDA</span>
-        <span class="info" name="avgKDA">0/30/5</span>
-    </div>
-    <div class="wrapper">
-        <span class="stat">Best KDA</span>
-        <span class="info"name="bestKDA">1/20/1 (Lost)</span>
-    </div>
-
-    </main>
-
-</div>
-        </div>
         
-        <!--
-        <table class="gameDat" id="gameInfo">
-            <tr>
-                <th></th>
-                <th>Unrated</th>
-                <th>Competitive</th>
-            </tr>
-            <tr>
-                <th>Matches Played</th>
-                <td id="Unrated_G"></td>
-                <td id="Competitive_G"></td>
 
-            </tr>
-            <tr>
-                <th>Wins</th>
-                <td id="Unrated_W"></td>
-                <td id="Competitive_W"></td>
-            </tr>
-            <tr>
-                <th>Average K/D/A</th>
-                <td id="Unrated_KDA"></td>
-                <td id="Competitive_KDA"></td>
-            </tr>
-            <tr>
-                <th>Best K/D/A</th>
-                <td id="Unrated_KDAbest"></td>
-                <td id="Competitive_KDAbest"></td>
 
-            </tr>
-            <tr class="filler">
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th></th>
-                <th>Deathmatch</th>
-
-                <th>Spike Rush</th>
-            </tr>
-            <tr>
-                <th>Matches Played</th>
-                <td id="Deathmatch_G"></td>
-                
-
-                <td id="Spike Rush_G"></td>
-
-            </tr>
-            <tr>
-                <th>Wins</th>
-                <td id="Deathmatch_W"></td>
-                <td id="Spike Rush_W"></td>
-            </tr>
-            <tr>
-                <th>Average K/D/A</th>
-                <td id="Deathmatch_KDA"></td>
-                <td id="Spike Rush_KDA"></td>
-            </tr>
-            <tr>
-                <th>Best K/D/A</th>
-                <td id="Deathmatch_KDAbest"></td>
-                <td id="Spike Rush_KDAbest"></td>
-
-            </tr>
-            <tr class="filler">
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th></th>
-                <th>Replication</th>
-                <th>Escalation</th>
-            </tr>
-            <tr>
-                <th>Matches Played</th>
-                <td id="Replication_G"></td>
-                <td id="Escalation_G"></td>
-
-            </tr>
-            <tr>
-                <th>Wins</th>
-                <td id="Replication_W"></td>
-                <td id="Escalation_W"></td>
-            </tr>
-            <tr>
-                <th>Average K/D/A</th>
-                <td id="Replication_KDA"></td>
-                <td id="Escalation_KDA"></td>
-            </tr>
-            <tr>
-                <th>Best K/D/A</th>
-                <td id="Replication_KDAbest"></td>
-                <td id="Escalation_KDAbest"></td>
-
-            </tr>
-        </table>
-        -->
-        
-        
     </div>
 </body>
 
