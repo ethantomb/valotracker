@@ -5,58 +5,33 @@
  */
 
 //Base api endpoints
-var mmrURL = "https://api.henrikdev.xyz/valorant/v1/mmr/";
-var matchHistURL = "https://api.henrikdev.xyz/valorant/v3/matches/";
+const mmrURL = "https://api.henrikdev.xyz/valorant/v1/mmr/";
+const matchHistURL = "https://api.henrikdev.xyz/valorant/v3/matches/";
+/**
+ * Sleeps for a time in ms
+ * @param {ms} - The time in ms
+ * @returns setTimeout promise: resolves in requested time.
+ */
 async function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-/**
- * A xmlhttprequest wrapper. Ill make it async later.
- * @param {string} url 
- * @returns 
- */
-async function httpGet(url) {
-    let response = await fetch(url, {
-        headers: {
-            "Content-Type": "text"
-        }
-    });
-    let data = await response.json();
-    console.log(data);
-    return data;
-}
-
-/**
- * Search button click response.
- */
-async function search() {
-    document.getElementById("search").innerHTML = "Searching...";
 
 
-    let input = document.getElementById("playerName").value;
-    let name = input.split("#")[0];
-    let tag = input.split("#")[1];
-    await sleep(1);
-    let tStart = performance.now();
-    await searchPlayer(name, tag);
 
-}
 /**
  * Search player
  * @param {*} name - The player's name
  * @param {*} tag  - The player's tag.
  * @returns - nada
  */
-async function searchPlayer(name, tag) {
+async function searchPlayer(name, tag,region) {
 
 
     //Normalize name.
     var ign=name;
     name = name.replace(" ", "%20");
-    document.querySelectorAll('.infoCard').forEach((div) => {
-        div.style.animation = "";
-    });
-    let region = document.querySelector('input[name="region"]:checked').value;
+    
+    
     if (!name || !tag) {
 
         console.log("err");
@@ -84,7 +59,7 @@ async function searchPlayer(name, tag) {
                 console.log("err");
                 document.getElementById("rankText").innerHTML = `Error: Failed to find player named ${name}#${tag}`;
 
-                document.getElementById("rankInfoCard").style.animation = "slideIn 4s ease 0s 1 normal forwards";
+                document.getElementById("rankInfoCard").style.animation = "slideIn 1s linear 0s 1 normal forwards";
                 document.getElementById("search").innerHTML = "Search";
                 return;
             }  
@@ -92,14 +67,17 @@ async function searchPlayer(name, tag) {
 
 
             let rank = mmrdata["data"]["currenttierpatched"];
+            let rankName,rankImsrc;
+            
             if(rank==null){
-                document.getElementById("rankText").innerHTML = "Unranked";
-                document.getElementById("rankImage").src = "https://static.wikia.nocookie.net/valorant/images/b/b2/TX_CompetitiveTier_Large_0.png";
-            }else{
-            document.getElementById("rankText").innerHTML = rank;
-            document.getElementById("rankImage").src = mmrdata["data"]["images"]["small"];
+                rankName="Unranked";
+                rankImsrc = "https://static.wikia.nocookie.net/valorant/images/b/b2/TX_CompetitiveTier_Large_0.png";
+                }else{
+                rankName=rank;
+                rankImsrc=mmrdata["data"]["images"]["small"];
             }
-            document.getElementById("rankInfoCard").style.animation = "slideIn 4s ease 0s 1 normal forwards";
+            addRankCard(rank,rankImsrc);
+            
             
         });
 
@@ -116,9 +94,8 @@ async function searchPlayer(name, tag) {
                 games = games["data"]
 
 
-                //let games = await httpGet(matchHistURL + region + "/" + name + "/" + tag + "?filter=" + gamemode)["data"];
                 let thisK, thisD, thisA;
-
+                
                 for (let i = 0; i < games.length; i++) {
 
                     let mode = games[i]["metadata"]["mode"];
@@ -147,8 +124,8 @@ async function searchPlayer(name, tag) {
                             data[mode]["bestK"] = thisK;
                             data[mode]["bestD"] = thisD;
                             data[mode]["bestA"] = thisA;
-                            data[mode]["wonBestMatch"] = gamemode == "deathmatch" ? (thisK == 40) : (searchedPlayer["team"] == winTeam);
-
+                            
+                            data[mode]["wonBestMatch"] = (mode.toLowerCase() == "deathmatch" && (thisK >= 40)) || (searchedPlayer["team"] == winTeam);
                         }
 
                     }
@@ -164,35 +141,7 @@ async function searchPlayer(name, tag) {
 
 
 }
-async function fillDivs(data) {
 
 
-    for (let [mode, gameDat] of Object.entries(data)) {
-        if (mode != "Metadata") {
 
-            mode = mode.replace(" ", "");
-            document.getElementById(mode).querySelector(`span[name="matchPlayed"]`).innerHTML = gameDat["games"];
-
-            document.getElementById(mode).querySelector(`span[name="win"]`).innerHTML = gameDat["wins"];
-            if (gameDat["games"] != 0) {
-                document.getElementById(mode).querySelector(`span[name="avgKDA"]`).innerHTML = Math.round(gameDat["K"] / gameDat["games"]) + "/" + Math.round(gameDat["D"] / gameDat["games"]) + "/" + Math.round(gameDat["A"] / gameDat["games"]);
-                document.getElementById(mode).querySelector(`span[name="bestKDA"]`).innerHTML = Math.round(gameDat["bestK"]) + "/" + Math.round(gameDat["bestD"]) + "/" + Math.round(gameDat["bestA"]) + "(" + (gameDat["wonBestMatch"] ? "Won" : "Lost") + ")";
-
-            } else {
-                document.getElementById(mode).querySelector(`span[name="avgKDA"]`).innerHTML = Math.round(gameDat["K"]) + "/" + Math.round(gameDat["D"]) + "/" + Math.round(gameDat["A"]);
-                document.getElementById(mode).querySelector(`span[name="bestKDA"]`).innerHTML = Math.round(gameDat["bestK"]) + "/" + Math.round(gameDat["bestD"]) + "/" + Math.round(gameDat["bestA"]) + "(" + (gameDat["wonBestMatch"] ? "Won" : "Lost") + ")";
-
-            }
-            document.getElementById(mode).style.animation = "slideIn 4s ease 0s 1 normal forwards";
-        }
-    }
-
-    document.getElementById("search").innerHTML = "Search";
-}
-
-window.addEventListener("keydown", function (event) {
-    if (event.key == "Enter") {
-        search();
-    }
-});
 

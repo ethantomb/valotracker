@@ -13,30 +13,30 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="./style.css">
-    <script async src="./API.js"></script>
+    <script async src="./scripts/API.js"></script>
     <title>ValTracker by Ethan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link data-n-head="ssr" rel="icon" type="image/x-icon" href="ValIcon.ico">
 </head>
 
 <body>
-    <h1>Valorant Player Tracker</h1>
+    <h1>ValoTracker</h1>
 
     <div class="inputContainer">
     <div class="input">
         <input type="text" id="playerName" placeholder="Name#Tag">
-
         <br>
         <label class="regionLabel" for="region">Region:</label>
         <div class="inputOptions">
-            <input type="radio" name="region" value="NA" checked><label class="regionOption">NA</label>
-            <input type="radio" name="region" value="EU"><label class="regionOption">EU</label>
-            <input type="radio" name="region" value="AP"><label class="regionOption">AP</label>
-            <input type="radio" name="region" value="KR"><label class="regionOption">KR</label>
+            
+            <button class = "regionBtn" id="NA" onclick='setRegion("NA")' style="background-color: #7baaf0;">NA</button>
+            <button class = "regionBtn" id="EU" onclick='setRegion("EU")'>EU</button>
+            <button class = "regionBtn" id="AP" onclick='setRegion("AP")'>AP</button>
+            <button class = "regionBtn" id="KR" onclick='setRegion("KR")'>KR</button>
         </div>
 
         <br>
-        <button id="search" onclick="search()">Search</button>
+        <button id="search" onclick="handleSearchButton()">Search</button>
 
     </div>
 </div>
@@ -217,6 +217,7 @@
 
 
     </div>
+    <script async src="./scripts/PageEventHandler.js"></script>
 </body>
 
 </html>

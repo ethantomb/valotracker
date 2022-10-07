@@ -30,6 +30,7 @@ input {
     justify-content: center;
     align-self:center;
     width: 100%;
+    
 }
 
 button {
@@ -40,6 +41,7 @@ button {
     padding: 10px;
     font-size: 20px;
     font-weight: bold;
+    margin:5px;
     margin-bottom: 10px;
 }
 
@@ -65,14 +67,15 @@ p {
     flex-direction: column;
     justify-content: center;
     align-self:center;
+    
     width: 100%;
     padding:10px;
-
+    
 }
 .infoCard{
     opacity: 0%;
     display:grid;
-    
+    margin-top:10px;
 
     width: 100%;
     grid-template-rows: auto auto;
@@ -81,6 +84,7 @@ p {
     border: thick solid #364966;
     border-radius: 15px;
     background-color: rgb(255, 220, 220);
+    box-shadow: 5px 10px 8px #888888;
 }
 .infoCard>header{
     grid-row: 1;
@@ -178,13 +182,13 @@ td {
     padding: 5px;
     font-size: 25px;
 }
-
+@font-face { font-family: Valorant; src: url('Valorant Font.otf'); } 
 h1 {
     width: 100%;
     font-size: 45px;
     font-weight: bold;
     text-align: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Valorant;
 }
 
 h3 {
@@ -213,6 +217,13 @@ input[type=radio] {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 20px;
 
+}
+.regionBtn{
+    padding-inline: 20px;
+    border:5px solid #364966;
+}
+.regionBtn:hover{
+    border:5px solid #7baaf0;
 }
 
 .liveGameInfo {
