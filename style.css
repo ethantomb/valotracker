@@ -4,7 +4,7 @@ body {
 .inputContainer{
     width: 100%;
     display:grid;
-    grid-template-columns: 1% 92.5% 5%;
+    grid-template-columns: 1% 98% 1%;
 }
 .input{
     grid-column:2;
@@ -41,7 +41,6 @@ button {
     padding: 10px;
     font-size: 20px;
     font-weight: bold;
-    margin:5px;
     margin-bottom: 10px;
 }
 
@@ -59,7 +58,8 @@ p {
 #response{
     width: 100%;
     display:grid;
-    grid-template-columns: 1% 92.5% 5%;
+    margin:0px;
+    grid-template-columns: 1% 98% 1%;
 }
 .infoCards{
     grid-column: 2;
@@ -67,9 +67,8 @@ p {
     flex-direction: column;
     justify-content: center;
     align-self:center;
-    
+    max-width:100%;
     width: 100%;
-    padding:10px;
     
 }
 .infoCard{
@@ -77,14 +76,13 @@ p {
     display:grid;
     margin-top:10px;
 
-    width: 100%;
+    max-width: 100%;
     grid-template-rows: auto auto;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     
     border: thick solid #364966;
     border-radius: 15px;
     background-color: rgb(255, 220, 220);
-    box-shadow: 5px 10px 8px #888888;
 }
 .infoCard>header{
     grid-row: 1;
@@ -120,11 +118,25 @@ p {
     position: relative;
     top: 0;
 }
+#introText{
+    opacity:100%;
+    max-width:100%;
+    margin-bottom:5px;
+}
+#introText>p{
+    padding:5px;
+    color:#000000;
+}
+#rankInfoOutside{
+    background-size:cover;
+    align-items:center;
+    justify-content:center;
+}
 #rankInfoCard{
     align-self: center;
     align-items:center;
     justify-content: center;
-    width: 50%;
+    width: 100%;
 }
 
 @keyframes slideIn{

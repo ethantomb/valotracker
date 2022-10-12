@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="./style.css">
     <script async src="./scripts/API.js"></script>
-    <title>ValTracker by Ethan</title>
+    <title>ValoTracker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link data-n-head="ssr" rel="icon" type="image/x-icon" href="ValIcon.ico">
 </head>
@@ -23,10 +23,19 @@
     <h1>ValoTracker</h1>
 
     <div class="inputContainer">
-    <div class="input">
-        <input type="text" id="playerName" placeholder="Name#Tag">
-        <br>
-        <label class="regionLabel" for="region">Region:</label>
+
+        <div class="input">
+            <div class="infoCard" id="introText">
+                <p>Hi, I'm Ethan, an aspiring developer. I used <a href="https://docs.henrikdev.xyz">HenrikDev's</a> Valorant API to build this player tracker. <br> Check my other work out out <a href="https://ethantomb.github.io" target="_blank">Here!</a></p>
+            </div>
+            
+            <input type="text" id="playerName" placeholder="Name#Tag">
+            <br>
+
+            <!--
+            Found a better way to get region
+
+        
         <div class="inputOptions">
             
             <button class = "regionBtn" id="NA" onclick='setRegion("NA")' style="background-color: #7baaf0;">NA</button>
@@ -34,27 +43,30 @@
             <button class = "regionBtn" id="AP" onclick='setRegion("AP")'>AP</button>
             <button class = "regionBtn" id="KR" onclick='setRegion("KR")'>KR</button>
         </div>
+-->
+            <br>
+            <button id="search" onclick="handleSearchButton()">Search</button>
 
-        <br>
-        <button id="search" onclick="handleSearchButton()">Search</button>
-
+        </div>
     </div>
-</div>
     <div id="response">
 
 
 
         <div class="infoCards">
-            <div class="infoCard" id="rankInfoCard">
-                <header>Current Rank</header>
-                <main>
-                    <div class="rank">
-                        <span id="rankText" class="rankText">Dirt 1</span>
-                        <span class="rankImage"><img id="rankImage"
-                                src="https://i.kym-cdn.com/entries/icons/original/000/031/672/cover7.jpg"></span>
-                    </div>
-                </main>
+            <div class="infoCard" id="rankInfoOutside">
+                <div class="infoCard" id="rankInfoCard">
+                    <header>Current Rank</header>
+                    <main>
+                        <div class="rank">
+                            <span id="rankText" class="rankText">Dirt 1</span>
+                            <span class="rankImage"><img id="rankImage"
+                                    src="https://i.kym-cdn.com/entries/icons/original/000/031/672/cover7.jpg"></span>
+                        </div>
+                    </main>
+                </div>
             </div>
+
             <div class="infoCard" id="Unrated">
 
                 <header>Unrated</header>
@@ -213,7 +225,7 @@
             </div>
         </div>
 
-        
+
 
 
     </div>

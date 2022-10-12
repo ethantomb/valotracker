@@ -3,6 +3,9 @@
  * Search button click response.
  */
 var selectedRegion = "NA";
+/**
+ * Processes input field, calls API/searchPlayer to get game information.
+ */
  async function handleSearchButton() {
     document.getElementById("search").innerHTML = "Searching...";
     let input = document.getElementById("playerName").value;
@@ -13,8 +16,9 @@ var selectedRegion = "NA";
     });
     await sleep(1);
     let tStart = performance.now();
-    await searchPlayer(name, tag,selectedRegion);
+    await searchPlayer(name, tag);
 }
+/*
 function setRegion(region){
     //Set selected region to region, make hover color stick to indicate selection
     let regions = ["NA","EU","AP","KR"];
@@ -28,9 +32,14 @@ function setRegion(region){
 
     }
 }
+*/
+/**
+ * Displays game information
+ * @param {Object{metadata:{name,tag},gamemode:{Game Information}} data - Game data collected from API
+ */
 async function fillDivs(data) {
 
-
+    //TODO: Fix ugly nooby string concatenation
     for (let [mode, gameDat] of Object.entries(data)) {
         if (mode != "Metadata") {
 
@@ -53,11 +62,21 @@ async function fillDivs(data) {
 
     document.getElementById("search").innerHTML = "Search";
 }
-
-async function addRankCard(rank,rankImsrc){
-    document.getElementById("rankText").innerHTML = rank;
+/**
+ * Adds the rank card div
+ * @param {String} rank the player's competitve rank and Tier
+ * @param {String} rankImsrc URL pointing to rank tier image
+ * @param {String} backgroundImSrc The Player's player card. 
+ * @param {String} level The player's account level
+ */
+async function addRankCard(rank,rankImsrc,backgroundImSrc,level){
+    document.getElementById("rankText").innerHTML = rank+"\nLevel "+level;
     document.getElementById("rankImage").src = rankImsrc;
+    document.getElementById("rankInfoOutside").style.backgroundImage = `url('${backgroundImSrc}')`;
     document.getElementById("rankInfoCard").style.animation = "slideIn 1s linear 0s 1 normal forwards";
+    document.getElementById("rankInfoOutside").style.animation = "slideIn 1s linear 0s 1 normal forwards";
+   
+
 }
 window.addEventListener("keydown", function (event) {
     if (event.key == "Enter") {
