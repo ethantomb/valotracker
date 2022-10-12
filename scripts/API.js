@@ -160,40 +160,44 @@ async function searchPlayer(name, tag) {
                                 let thisK, thisD, thisA;
                                 for (let i = 0; i < games.length; i++) {
                                     //This line is unnescecary, but rather than refactoring, I will assert my knowledge in this comment.
-                                    let mode = games[i]["metadata"]["mode"];
-                                    //This breaks for custom games. Plus I dont store any info about them.
-                                    if (mode != "Custom Game") {
-
-
-                                        let winTeam = (games[i]["teams"]["red"]["has_won"] ? "Red" : "Blue");
-                                        data[mode]["games"] += 1;
-
-                                        let players = games[i]["players"]["all_players"];
-                                        //Get the searched player from the list of players. Search by PUUID in case of recent name change
-                                        let searchedPlayer = players.filter(p => p["puuid"] == puuid)[0];
-                                        //If player is on the win team, add 1 to wins. Currently counts draw as a win.
-                                        //TODO: Check for draws
-                                        if (searchedPlayer["team"] == winTeam) {
-                                            data[mode]["wins"] += 1
+                                    if("metadata" in games[i]){
+                                        let mode = games[i]["metadata"]["mode"];
+                                        //This breaks for custom games. Plus I dont store any info about them.
+                                        if (mode != "Custom Game") {
+    
+    
+                                            let winTeam = (games[i]["teams"]["red"]["has_won"] ? "Red" : "Blue");
+                                            data[mode]["games"] += 1;
+    
+                                            let players = games[i]["players"]["all_players"];
+                                            //Get the searched player from the list of players. Search by PUUID in case of recent name change
+                                            let searchedPlayer = players.filter(p => p["puuid"] == puuid)[0];
+                                            //If player is on the win team, add 1 to wins. Currently counts draw as a win.
+                                            //TODO: Check for draws
+                                            
+                                            thisK = parseInt(searchedPlayer["stats"]["kills"]);
+                                            thisD = parseInt(searchedPlayer["stats"]["deaths"]);
+                                            thisA = parseInt(searchedPlayer["stats"]["assists"]);
+                                            //Divide by zero error but lets be real youre gonna get 1 tapped at least once. 
+                                            //TODO: Fix divide by zero error.
+                                            data[mode]["K"] += thisK;
+                                            data[mode]["D"] += thisD;
+                                            data[mode]["A"] += thisA;
+                                            if (searchedPlayer["team"] == winTeam||mode.toLowerCase()=="deathmatch"&&thisK>=40) {
+                                                data[mode]["wins"] += 1
+                                            }
+                                            if (thisK / thisD > data[mode]["bestKD"]) {
+                                                data[mode]["bestKD"] = thisK / thisD;
+                                                data[mode]["bestK"] = thisK;
+                                                data[mode]["bestD"] = thisD;
+                                                data[mode]["bestA"] = thisA;
+    
+                                                data[mode]["wonBestMatch"] = (mode.toLowerCase() == "deathmatch" && (thisK >= 40)) || (searchedPlayer["team"] == winTeam);
+                                            }
+    
                                         }
-                                        thisK = parseInt(searchedPlayer["stats"]["kills"]);
-                                        thisD = parseInt(searchedPlayer["stats"]["deaths"]);
-                                        thisA = parseInt(searchedPlayer["stats"]["assists"]);
-                                        //Divide by zero error but lets be real youre gonna get 1 tapped at least once. 
-                                        //TODO: Fix divide by zero error.
-                                        data[mode]["K"] += thisK;
-                                        data[mode]["D"] += thisD;
-                                        data[mode]["A"] += thisA;
-                                        if (thisK / thisD > data[mode]["bestKD"]) {
-                                            data[mode]["bestKD"] = thisK / thisD;
-                                            data[mode]["bestK"] = thisK;
-                                            data[mode]["bestD"] = thisD;
-                                            data[mode]["bestA"] = thisA;
-
-                                            data[mode]["wonBestMatch"] = (mode.toLowerCase() == "deathmatch" && (thisK >= 40)) || (searchedPlayer["team"] == winTeam);
-                                        }
-
                                     }
+                                    
                                 }
                             }
                             //Replication is the last mode. Call PageEventHandler/fillDivs to display the information.
